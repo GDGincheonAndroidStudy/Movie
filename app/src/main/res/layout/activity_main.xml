@@ -3,11 +3,27 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <fragment
-        android:name="seunghyo.com.movie.FragmentA"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <FrameLayout
+
         android:id="@+id/fragmentOne"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <FrameLayout
+
+        android:id="@+id/fragmentTwo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -1,18 +1,20 @@
 package seunghyo.com.movie;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +22,8 @@ import android.widget.TextView;
  * Created by SeungHyo on 2015-11-13.
  */
 public class FragmentA extends Fragment {
+
+    OnClickActionCallBackA onClickAction;
 
     String[] titles = {
             "인크레더블 헐크 (2008)",
@@ -64,10 +68,19 @@ public class FragmentA extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View rootView;
+
+
+        try {
+            onClickAction = (OnClickActionCallBackA) getActivity();
+        } catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString()
+                    + " must implement OnHeadlineSelectedListener");
+        }
+
         rootView = inflater.inflate(R.layout.main, container, false);
         rootView.setBackgroundColor(Color.WHITE);
         ListView listView = (ListView) rootView.findViewById(R.id.list);
-
+        LinearLayout linearLayout = (LinearLayout) rootView.findViewById(R.id.linear1);
         CustomList customList = new CustomList(getActivity());
         listView.setAdapter(customList);
 
@@ -78,8 +91,11 @@ public class FragmentA extends Fragment {
                 FragmentTransaction transaction = manager.beginTransaction();
                 FragmentB fragmentB = new FragmentB();
                 Bundle bundle = new Bundle();
-                if(getActivity().getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-                    transaction.replace(R.id.fragmentOne, fragmentB, "fragment"+position);
+
+                if(Util.getInstance().isPortrait(getActivity())) {
+
+                    onClickAction.onclicklistview();
+                    transaction.replace(R.id.fragmentTwo, fragmentB, "fragment"+position);
                     bundle.putString("title", titles[position]);
                     bundle.putString("rating", ratings[position]);
                     bundle.putString("content", contents[position]);
@@ -130,4 +146,10 @@ public class FragmentA extends Fragment {
             return rowView;
         }
     }
+
+
+    public interface OnClickActionCallBackA {
+        public void onclicklistview();
+    }
+
 }
