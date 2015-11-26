@@ -1,28 +1,25 @@
 package seunghyo.com.movie;
 
-
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v4.app.Fragment;
 
 /**
- * Created by SeungHyo on 2015-11-13.
+ * Created by SeungHyo on 2015-11-26.
  */
 
-public class FragmentB extends Fragment {
-
-    OnclickActionB onclickActionB;
+public class FragmentC extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView;
-        rootView = inflater.inflate(R.layout.fragment_b, container, false);
+        rootView = inflater.inflate(R.layout.fragment_c, container, false);
         rootView.setBackgroundColor(Color.WHITE);
         TextView titles = (TextView) rootView.findViewById(R.id.title);
         ImageView images = (ImageView) rootView.findViewById(R.id.image);
@@ -48,29 +45,13 @@ public class FragmentB extends Fragment {
         }
 
         titles.setText(title);
-        titles.setTextSize(20);
+        titles.setTextSize(15);
         images.setImageResource(image);
         actors.setText(actor);
         ratings.setText(rating);
         contents.setText(content);
 
-        try {
-            onclickActionB = (OnclickActionB) getActivity();
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString()
-                    + " must implement OnHeadlineSelectedListener");
-        }
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    onclickActionB.OnclickCloseBtn();
-            }
-        });
         return rootView;
     }
 
-    public interface OnclickActionB {
-        public void OnclickCloseBtn();
-    }
 }
