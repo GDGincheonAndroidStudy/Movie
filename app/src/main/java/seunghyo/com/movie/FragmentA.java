@@ -1,6 +1,7 @@
 package seunghyo.com.movie;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -93,16 +94,14 @@ public class FragmentA extends Fragment {
                 Bundle bundle = new Bundle();
 
                 if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+                    Intent intent = new Intent(getActivity(), DetailActivity.class);
+                    intent.putExtra("title", titles[position]);
+                    intent.putExtra("rating", ratings[position]);
+                    intent.putExtra("content", contents[position]);
+                    intent.putExtra("actor", actors[position]);
+                    intent.putExtra("image", images[position]);
 
-                    onClickAction.onclicklistview();
-                    transaction.replace(R.id.fragmentTwo, fragmentB, "fragment"+position);
-                    bundle.putString("title", titles[position]);
-                    bundle.putString("rating", ratings[position]);
-                    bundle.putString("content", contents[position]);
-                    bundle.putString("actor", actors[position]);
-                    bundle.putInt("image", images[position]);
-                    fragmentB.setArguments(bundle);
-                    transaction.commit();
+                    startActivity(intent);
                 }
                 else {
                     transaction.replace(R.id.fragmentTwo, fragmentC, "fragment"+position);
