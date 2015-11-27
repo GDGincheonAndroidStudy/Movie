@@ -89,7 +89,6 @@ public class FragmentA extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 FragmentManager manager = getFragmentManager();
                 FragmentTransaction transaction = manager.beginTransaction();
-                FragmentB fragmentB = new FragmentB();
                 FragmentC fragmentC = new FragmentC();
                 Bundle bundle = new Bundle();
 

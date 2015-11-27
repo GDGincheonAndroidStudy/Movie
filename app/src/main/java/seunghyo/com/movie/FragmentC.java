@@ -1,5 +1,6 @@
 package seunghyo.com.movie;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,9 @@ import android.support.v4.app.Fragment;
 
 public class FragmentC extends Fragment{
 
+    String title, rating, content, actor;
+    int image;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView;
@@ -28,14 +32,14 @@ public class FragmentC extends Fragment{
         TextView actors = (TextView) rootView.findViewById(R.id.actor);
         Button button = (Button) rootView.findViewById(R.id.back);
         Bundle bundle = getArguments();
-        String title, rating, content, actor;
-        int image;
+
         try {
             title = bundle.getString("title");
             image = bundle.getInt("image");
             rating = bundle.getString("rating");
             content = bundle.getString("content");
             actor = bundle.getString("actor");
+
         } catch (NullPointerException e) {
             title = "인크레더블 헐크 (2008)";
             image = R.drawable.helk;
@@ -50,6 +54,19 @@ public class FragmentC extends Fragment{
         actors.setText(actor);
         ratings.setText(rating);
         contents.setText(content);
+
+        images.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), DetailActivity.class);
+                intent.putExtra("title", title);
+                intent.putExtra("rating", rating);
+                intent.putExtra("content", content);
+                intent.putExtra("actor", actor);
+                intent.putExtra("image", image);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }

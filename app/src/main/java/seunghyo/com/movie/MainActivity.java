@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity implements FragmentA.OnClickActionCallBackA, FragmentB.OnclickActionB {
+public class MainActivity extends AppCompatActivity implements FragmentA.OnClickActionCallBackA{
 
     LinearLayout linearLayout_port;
     LinearLayout linearLayout_land;
@@ -77,15 +77,6 @@ public class MainActivity extends AppCompatActivity implements FragmentA.OnClick
     public void onclicklistview() {
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             linearLayout_port.setVisibility(View.VISIBLE);
-        } else {
-            linearLayout_land.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void OnclickCloseBtn() {
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            linearLayout_port.setVisibility(View.GONE);
         } else {
             linearLayout_land.setVisibility(View.VISIBLE);
         }
